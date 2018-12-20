@@ -1,0 +1,26 @@
+zuul:
+  routes:
+#    # 路由名称可随意命名，但path和url成对出现
+#    # path = /api-a-url/hello?name=huyunlong 重定向到 http://localhost:28001/hello?name=huyunlong
+#    api-a-url:
+#      path: /api-a-url/**
+#      url: http://localhost:28001/
+    # path = /api-a/hello?name=huyunlong 重定向到 http://eureka-producer-client/hello?name=huyunlong
+    service-a:
+      path: /service-a/**
+      # eureka注册服务名，不区分大小写
+      serviceId: eureka-producer-client
+    # path = /api-b/feign-consumer 重定向到 http://FEIGN-CONSUMER/feign-consumer
+    service-b:
+      path: /service-b/**
+      serviceId: FEIGN-CONSUMER
+      #跳过通用前缀
+#      strip-prefix: true
+
+  #zuul 路由通用前缀
+#  prefix: /api
+  #默认会根据服务名称 path: /service-name/** serviceId: service-name生成默认route规则
+  #使用ignored-services剔除生成默认规则的服务，*代表所有服务
+#  ignored-services: *
+  #忽略某些路径匹配
+#  ignored-patterns:
